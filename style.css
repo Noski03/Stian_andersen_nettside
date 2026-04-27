@@ -806,3 +806,95 @@ textarea {
   transform: skew(-10deg) translateY(-5px);
   box-shadow: -5px 5px 0 white;
 }
+/* --- MOBIL MENY LOGIKK --- */
+
+/* Skjul checkboxen */
+.nav-toggle {
+  display: none;
+}
+
+/* Styling av Hamburger-ikonet */
+.nav-toggle-label {
+  display: none; /* Skjult på PC */
+  cursor: pointer;
+  padding: 10px;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  display: block;
+  background: var(--accent);
+  height: 2px;
+  width: 25px;
+  position: relative;
+  transition: var(--transition);
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  content: "";
+  position: absolute;
+}
+
+.nav-toggle-label span::before {
+  bottom: 8px;
+}
+.nav-toggle-label span::after {
+  top: 8px;
+}
+
+/* --- RESPONSIV DESIGN (Mobil) --- */
+@media (max-width: 768px) {
+  .nav-toggle-label {
+    display: block; /* Vises på mobil */
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 70px; /* Høyden på headeren */
+    right: -100%; /* Starter utenfor skjermen */
+    width: 80%;
+    height: 100vh;
+    background: #0a0a0a;
+    flex-direction: column;
+    padding: 50px 20px;
+    transition: 0.5s ease;
+    border-left: 1px solid #222;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
+  .nav-link {
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .nav-cta {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Vis meny når checkbox er huket av */
+  .nav-toggle:checked ~ .nav-links {
+    right: 0;
+  }
+
+  /* Animer hamburger til et 'X' når åpen */
+  .nav-toggle:checked ~ .nav-toggle-label span {
+    background: transparent;
+  }
+
+  .nav-toggle:checked ~ .nav-toggle-label span::before {
+    transform: rotate(45deg);
+    bottom: 0;
+  }
+
+  .nav-toggle:checked ~ .nav-toggle-label span::after {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+}
